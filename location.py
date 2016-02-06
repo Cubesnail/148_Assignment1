@@ -27,6 +27,7 @@ class Location:
         """
         # TODO
         pass
+        return self == other
 
 
 def manhattan_distance(origin, destination):
