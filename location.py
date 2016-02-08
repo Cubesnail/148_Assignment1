@@ -39,7 +39,8 @@ def manhattan_distance(origin, destination):
     """
     # TODO
     pass
-
+    distance = 0
+    distance += abs(origin.row - destination.row) + abs(origin.column - destination.column)
 
 
 def deserialize_location(location_str):
