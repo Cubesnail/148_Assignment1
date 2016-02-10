@@ -10,6 +10,7 @@ constants that represent the status of the rider.
 @type SATISFIED: str
     A constant used for the satisfied rider status
 """
+from location import Location
 
 WAITING = "waiting"
 CANCELLED = "cancelled"
@@ -17,5 +18,10 @@ SATISFIED = "satisfied"
 
 
 class Rider:
-    # TODO
+    # TODO: patience, status, origin, destination
     pass
+    def __init__(self):
+        patience = 0 #number of minutes the rider will wait
+        status = WAITING
+        origin = Location()
+        destination = Location()

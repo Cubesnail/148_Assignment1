@@ -10,7 +10,7 @@ class Location:
         # TODO
         pass
         self.row = row
-        self.column = column
+        self.col = column
 
     def __str__(self):
         """Return a string representation.
@@ -38,9 +38,7 @@ def manhattan_distance(origin, destination):
     @rtype: int
     """
     # TODO
-    pass
-    distance = 0
-    distance += abs(origin.row - destination.row) + abs(origin.column - destination.column)
+    return abs(origin.row - destination.row) + abs(origin.col - destination.col)
 
 
 def deserialize_location(location_str):
@@ -52,3 +50,7 @@ def deserialize_location(location_str):
     """
     # TODO
     pass
+    result = Location()
+    helper_list = location_str.split(',')
+    result.col = int(helper_string[0])
+    result.row = int(helper_list[1])
