@@ -17,16 +17,13 @@ class Location:
 
         @rtype: str
         """
-        # TODO
-        pass
+        return str(self.row) + ',' + str(self.col)
 
     def __eq__(self, other):
         """Return True if self equals other, and false otherwise.
 
         @rtype: bool
         """
-        # TODO
-        pass
         return self == other
 
 
@@ -37,7 +34,6 @@ def manhattan_distance(origin, destination):
     @type destination: Location
     @rtype: int
     """
-    # TODO
     return abs(origin.row - destination.row) + abs(origin.col - destination.col)
 
 
@@ -48,9 +44,6 @@ def deserialize_location(location_str):
         A location in the format 'row,col'
     @rtype: Location
     """
-    # TODO
-    pass
-    result = Location()
-    helper_list = location_str.split(',')
-    result.col = int(helper_string[0])
-    result.row = int(helper_list[1])
+    # Parse the string and type cast it
+    temp_list = location_str.split(',')
+    result = Location(int(temp_list[1]), int(temp_list[0]))

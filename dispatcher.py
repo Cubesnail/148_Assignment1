@@ -1,6 +1,6 @@
 from driver import Driver
 from rider import Rider
-
+from container import PriorityQueue
 
 class Dispatcher:
     """A dispatcher fulfills requests from riders and drivers for a
@@ -25,7 +25,8 @@ class Dispatcher:
         @rtype: None
         """
         # TODO
-        pass
+        self.driver_list = []
+        self.rider_queue = PriorityQueue
 
     def __str__(self):
         """Return a string representation.
@@ -46,6 +47,7 @@ class Dispatcher:
         @rtype: Driver | None
         """
         # TODO
+
         pass
 
     def request_rider(self, driver):

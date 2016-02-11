@@ -117,5 +117,5 @@ class PriorityQueue(Container):
         >>> pq._items
         ['blue', 'green', 'red', 'yellow']
         """
-        # TODO
-        pass
+        self._items.append(item)
+        self._items.sort()
