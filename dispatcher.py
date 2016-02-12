@@ -50,6 +50,12 @@ class Dispatcher:
         if len(self.driver_list) == 0:
             return None
         else:
+            shortest_time = self.driver_list[0]
+            for name in self.driver_list:
+                if name.get_travel_time(rider.destination) < shortest_time.get_travel_time(rider.destination):
+                    shortest_time = name
+        return name
+
 
     def request_rider(self, driver):
         """Return a rider for the driver, or None if no rider is available.
@@ -61,7 +67,7 @@ class Dispatcher:
         @rtype: Rider | None
         """
         # TODO
-        pass
+        return self.rider_queue.remove()
 
     def cancel_ride(self, rider):
         """Cancel the ride for rider.
@@ -71,4 +77,5 @@ class Dispatcher:
         @rtype: None
         """
         # TODO
+        self.rider_queue.remove()
         pass
