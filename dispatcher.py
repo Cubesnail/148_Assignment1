@@ -47,8 +47,9 @@ class Dispatcher:
         @rtype: Driver | None
         """
         # TODO
-
-        pass
+        if len(self.driver_list) == 0:
+            return None
+        else:
 
     def request_rider(self, driver):
         """Return a rider for the driver, or None if no rider is available.
