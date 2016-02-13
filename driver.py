@@ -28,6 +28,7 @@ class Driver:
         self.location = location
         self.speed = speed
         self.destination = Location()
+        self.rider = Rider()
 
     def __str__(self):
         """Return a string representation.
@@ -80,7 +81,7 @@ class Driver:
         @rtype: None
         """
         # TODO
-        pass
+        self.location = self.destination
 
     def start_ride(self, rider):
         """Start a ride and return the time the ride will take.
@@ -90,8 +91,10 @@ class Driver:
         @rtype: int
         """
         # TODO
-        pass
-
+        self.rider = rider
+        self.location = rider.origin
+        self.destination = rider.destination
+        return self.get_travel_time(rider.destination)
     def end_ride(self):
         """End the current ride, and arrive at the rider's destination.
 
@@ -102,4 +105,5 @@ class Driver:
         @rtype: None
         """
         # TODO
-        pass
+        self.rider = None
+        self.location = self.destination
