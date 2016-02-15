@@ -283,19 +283,21 @@ class DriverRequest(Event):
 class Cancellation(Event):
     # TODO
     def __str__(self):
-        pass
+        return "{} -- {}: Cancelled.".format(self.timestamp,self.rider)
     pass
 
 
 class Pickup(Event):
     # TODO
     def __str__(self):
-        pass
+        return "{} -- {}: Got picked up.".format(self.timestamp,self.rider)
     pass
 
 
 class Dropoff(Event):
     # TODO
+    def __str__(self):
+        return "{} -- {}: Got dropped off.".format(self.timestamp,self.rider)
     pass
 
 
