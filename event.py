@@ -327,10 +327,12 @@ def create_event_list(filename):
 
             if event_type == "DriverRequest":
                 # TODO
+                DriverRequest(Event)
                 # Create a DriverRequest event.
                 pass
             elif event_type == "RiderRequest":
                 # TODO
+                RiderRequest(Event)
                 # Create a RiderRequest event.
                 pass
 
