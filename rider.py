@@ -20,8 +20,10 @@ SATISFIED = "satisfied"
 class Rider:
     # TODO: patience, status, origin, destination
     pass
-    def __init__(self):
+    def __init__(self,identifier,patience,origin,destination):
         patience = 0 #number of minutes the rider will wait
         status = WAITING
-        origin = Location()
-        destination = Location()
+        name = identifier
+        origin = origin
+        destination = destination
+        patience = patience

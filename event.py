@@ -282,11 +282,15 @@ class DriverRequest(Event):
 
 class Cancellation(Event):
     # TODO
+    def __str__(self):
+        pass
     pass
 
 
 class Pickup(Event):
     # TODO
+    def __str__(self):
+        pass
     pass
 
 
@@ -321,21 +325,23 @@ def create_event_list(filename):
             tokens = line.split()
             timestamp = int(tokens[0])
             event_type = tokens[1]
+            event_helper = Event(timestamp)
 
             # HINT: Use Location.deserialize to convert the location string to
             # a location.
 
             if event_type == "DriverRequest":
                 # TODO
-                DriverRequest(Event)
+                driver_helper = Driver(tokens[2],deserialize_location(tokens[3]),int(tokens[4]))
+                DriverRequest(timestamp,driver_helper)
                 # Create a DriverRequest event.
                 pass
             elif event_type == "RiderRequest":
                 # TODO
-                RiderRequest(Event)
+                rider_helper = Rider(tokens)
+                RiderRequest(timestamp,)
                 # Create a RiderRequest event.
                 pass
-
-            events.append(event)
-
+            events.append(Event)
     return events
+
