@@ -24,7 +24,7 @@ class Driver:
         @rtype: None
         """
         # TODO
-        self.name = identifier
+        self.id = identifier
         self.location = location
         self.speed = speed
         self.destination = Location()

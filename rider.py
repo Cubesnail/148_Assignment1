@@ -21,9 +21,9 @@ class Rider:
     # TODO: patience, status, origin, destination
     pass
     def __init__(self,identifier,patience,origin,destination):
-        patience = 0 #number of minutes the rider will wait
+        #patience = 0 #number of minutes the rider will wait
         status = WAITING
-        name = identifier
+        id = identifier
         origin = origin
         destination = destination
         patience = patience

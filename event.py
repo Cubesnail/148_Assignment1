@@ -269,7 +269,15 @@ class DriverRequest(Event):
         # rider, and the method returns a Pickup event for when the driver
         # arrives at the riders location.
         # TODO
-        pass
+        monitor.notify(self, DRIVER, REQUEST, self.driver.id,self.driver.location)
+
+        rider = dispatcher.request_rider(self.driver)
+        events = []
+        if rider is not None
+            travel_time = self.driver.start_drive(rider.destination)
+            events.append(Pickup(self.timestamp + rider.patience,rider,self.driver))
+        events.append(Cancellation(self.timestamp + rider.patience, rider, self.driver))
+        return events
 
     def __str__(self):
         """Return a string representation of this event.
@@ -282,6 +290,10 @@ class DriverRequest(Event):
 
 class Cancellation(Event):
     # TODO
+    def __init__(self, timestamp, rider, driver):
+        self.timestamp = timestamp
+        self.rider = rider
+        self.driver = driver
     def __str__(self):
         return "{} -- {}: Cancelled.".format(self.timestamp,self.rider)
     pass
@@ -289,6 +301,10 @@ class Cancellation(Event):
 
 class Pickup(Event):
     # TODO
+    def __init__(self, timestamp, rider, driver):
+        self.timestamp = timestamp
+        self.rider = rider
+        self.driver = driver
     def __str__(self):
         return "{} -- {}: Got picked up.".format(self.timestamp,self.rider)
     pass
@@ -296,13 +312,12 @@ class Pickup(Event):
 
 class Dropoff(Event):
     # TODO
-
+    def __int__(self, timestamp, rider, driver):
+        self.rider = rider
+        self.timestamp = timestamp
+        self.driver = driver
     def __str__(self):
         return "{} -- {}: Got dropped off.".format(self.timestamp,self.rider)
-
-    def do():
-        ./
-    pass
 
 
 def create_event_list(filename):

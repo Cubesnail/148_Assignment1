@@ -149,8 +149,10 @@ class Monitor:
         @type self: Monitor
         @rtype: float
         """
-        # TODO
-        pass
+        total_distance = 0
+        count = 0
+        for activities in self._activities[DRIVER].values():
+            pass
 
     def _average_ride_distance(self):
         """Return the average distance drivers have driven on rides.
