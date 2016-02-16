@@ -296,8 +296,12 @@ class Pickup(Event):
 
 class Dropoff(Event):
     # TODO
+
     def __str__(self):
         return "{} -- {}: Got dropped off.".format(self.timestamp,self.rider)
+
+    def do():
+        ./
     pass
 
 
@@ -333,17 +337,14 @@ def create_event_list(filename):
             # a location.
 
             if event_type == "DriverRequest":
-                # TODO
                 driver_helper = Driver(tokens[2],deserialize_location(tokens[3]),int(tokens[4]))
                 DriverRequest(timestamp,driver_helper)
                 # Create a DriverRequest event.
                 pass
             elif event_type == "RiderRequest":
-                # TODO
-                rider_helper = Rider(tokens)
-                RiderRequest(timestamp,)
+                rider_helper = Rider(tokens[2],tokens[5],deserialize_location(tokens[3]),deserialize_location(tokens[4]))
+                RiderRequest(timestamp,rider_helper)
                 # Create a RiderRequest event.
                 pass
             events.append(Event)
     return events
-
