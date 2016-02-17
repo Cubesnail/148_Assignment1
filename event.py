@@ -273,7 +273,7 @@ class DriverRequest(Event):
 
         rider = dispatcher.request_rider(self.driver)
         events = []
-        if rider is not None
+        if rider is not None:
             travel_time = self.driver.start_drive(rider.destination)
             events.append(Pickup(self.timestamp + rider.patience,rider,self.driver))
         events.append(Cancellation(self.timestamp + rider.patience, rider, self.driver))
@@ -291,6 +291,7 @@ class DriverRequest(Event):
 class Cancellation(Event):
     # TODO
     def __init__(self, timestamp, rider, driver):
+        super().__init__(timestamp)
         self.timestamp = timestamp
         self.rider = rider
         self.driver = driver
@@ -302,6 +303,7 @@ class Cancellation(Event):
 class Pickup(Event):
     # TODO
     def __init__(self, timestamp, rider, driver):
+        super().__init__(timestamp)
         self.timestamp = timestamp
         self.rider = rider
         self.driver = driver
@@ -313,6 +315,7 @@ class Pickup(Event):
 class Dropoff(Event):
     # TODO
     def __int__(self, timestamp, rider, driver):
+        super.init(timestamp)
         self.rider = rider
         self.timestamp = timestamp
         self.driver = driver

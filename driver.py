@@ -27,8 +27,8 @@ class Driver:
         self.id = identifier
         self.location = location
         self.speed = speed
-        self.destination = Location()
-        self.rider = Rider()
+        self.destination = None
+        self.rider = None
 
     def __str__(self):
         """Return a string representation.

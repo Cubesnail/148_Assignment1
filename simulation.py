@@ -54,7 +54,8 @@ class Simulation:
 
         # Add all initial events to the event queue.
         for event in initial_events:
-
+            self._events.add(event)
+            pass
         # Until there are no more events, remove an event
         # from the event queue and do it. Add any returned
         # events to the event queue.
