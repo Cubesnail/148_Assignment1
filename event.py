@@ -353,12 +353,12 @@ def create_event_list(filename):
 
             if event_type == "DriverRequest":
                 driver_helper = Driver(tokens[2],deserialize_location(tokens[3]),int(tokens[4]))
-                DriverRequest(timestamp,driver_helper)
+                # DriverRequest(timestamp,driver_helper)
                 # Create a DriverRequest event.
                 pass
             elif event_type == "RiderRequest":
                 rider_helper = Rider(tokens[2],tokens[5],deserialize_location(tokens[3]),deserialize_location(tokens[4]))
-                RiderRequest(timestamp,rider_helper)
+                # RiderRequest(timestamp,rider_helper)
                 # Create a RiderRequest event.
                 pass
             events.append(Event)

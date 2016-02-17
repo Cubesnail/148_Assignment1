@@ -51,9 +51,9 @@ class Simulation:
         @rtype: dict[str, object]
         """
         # TODO
-        pass
 
         # Add all initial events to the event queue.
+        for event in initial_events:
 
         # Until there are no more events, remove an event
         # from the event queue and do it. Add any returned
