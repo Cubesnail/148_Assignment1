@@ -269,7 +269,7 @@ class DriverRequest(Event):
         # rider, and the method returns a Pickup event for when the driver
         # arrives at the riders location.
         # TODO
-        monitor.notify(self, DRIVER, REQUEST, self.driver.id,self.driver.location)
+        monitor.notify(self, DRIVER, REQUEST, self.driver.id, self.driver.location)
 
         rider = dispatcher.request_rider(self.driver)
         events = []
@@ -295,9 +295,14 @@ class Cancellation(Event):
         self.timestamp = timestamp
         self.rider = rider
         self.driver = driver
+
     def __str__(self):
         return "{} -- {}: Cancelled.".format(self.timestamp,self.rider)
-    pass
+
+    def do(self, dispatcher, monitor):
+        monitor.notify(self, RIDER, CANCEL, self.rider.id, self.rider.location)
+
+        dispatcher.cancel_ride(self.rider)
 
 
 class Pickup(Event):
@@ -307,21 +312,27 @@ class Pickup(Event):
         self.timestamp = timestamp
         self.rider = rider
         self.driver = driver
+
     def __str__(self):
         return "{} -- {}: Got picked up.".format(self.timestamp,self.rider)
-    pass
+
+    def do(self, dispatcher, monitor):
+        monitor.notify(self, RIDER, PICKUP, self.rider.id, self.rider.location)
 
 
 class Dropoff(Event):
     # TODO
-    def __int__(self, timestamp, rider, driver):
-        super.init(timestamp)
+    def __init__(self, timestamp, rider, driver):
+        super().__init__(timestamp)
         self.rider = rider
         self.timestamp = timestamp
         self.driver = driver
+
     def __str__(self):
         return "{} -- {}: Got dropped off.".format(self.timestamp,self.rider)
 
+    def do(self, dispatcher, monitor):
+        monitor.notify(self, self.rider, DROPOFF, self.rider.id, self.rider.destination)
 
 def create_event_list(filename):
     """Return a list of Events based on raw list of events in <filename>.
@@ -359,7 +370,7 @@ def create_event_list(filename):
                 # Create a DriverRequest event.
                 pass
             elif event_type == "RiderRequest":
-                temp_Rider = Rider(tokens[2],tokens[5],deserialize_location(tokens[3]),deserialize_location(tokens[4]))
+                temp_Rider = Rider(tokens[2],int(tokens[5]),deserialize_location(tokens[3]),deserialize_location(tokens[4]))
                 Event = RiderRequest(timestamp,temp_Rider)
                 # Create a RiderRequest event.
                 pass

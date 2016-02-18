@@ -47,3 +47,4 @@ def deserialize_location(location_str):
     # Parse the string and type cast it
     temp_list = location_str.split(',')
     result = Location(int(temp_list[1]), int(temp_list[0]))
+    return result
