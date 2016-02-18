@@ -221,7 +221,7 @@ class RiderRequest(Event):
         if driver is not None:
             travel_time = driver.start_drive(self.rider.origin)
             events.append(Pickup(self.timestamp + travel_time, self.rider, driver))
-            events.append(Cancellation(self.timestamp + self.rider.patience, self.rider))  # Changed starter code here
+        events.append(Cancellation(self.timestamp + self.rider.patience, self.rider, driver))  # Changed starter code here
         return events
 
     def __str__(self):
@@ -268,7 +268,6 @@ class DriverRequest(Event):
         # If there is one available, the driver starts driving towards the
         # rider, and the method returns a Pickup event for when the driver
         # arrives at the riders location.
-        # TODO
         monitor.notify(self, DRIVER, REQUEST, self.driver.id, self.driver.location)
 
         rider = dispatcher.request_rider(self.driver)
@@ -332,7 +331,7 @@ class Dropoff(Event):
         return "{} -- {}: Got dropped off.".format(self.timestamp,self.rider)
 
     def do(self, dispatcher, monitor):
-        monitor.notify(self, self.rider, DROPOFF, self.rider.id, self.rider.destination)
+        monitor.notify(self, RIDER, DROPOFF, self.rider.id, self.rider.destination)
 
 def create_event_list(filename):
     """Return a list of Events based on raw list of events in <filename>.

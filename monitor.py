@@ -149,6 +149,7 @@ class Monitor:
         @type self: Monitor
         @rtype: float
         """
+        # TODO
         total_distance = 0
         count = 0
         for activities in self._activities[DRIVER].values():

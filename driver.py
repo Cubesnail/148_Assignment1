@@ -105,5 +105,7 @@ class Driver:
         @rtype: None
         """
         # TODO
+        self.rider.location = self.destination
         self.rider = None
         self.location = self.destination
+        self.destination = None
