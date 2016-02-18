@@ -53,9 +53,9 @@ class Dispatcher:
             shortest_time = self.driver_list[0]
             for name in self.driver_list:
                 if name.get_travel_time(rider.destination) < shortest_time.get_travel_time(rider.destination):
-                    shortest_time = name
+                    if name.is_idle():
+                        shortest_time = name
         return name
-
 
     def request_rider(self, driver):
         """Return a rider for the driver, or None if no rider is available.

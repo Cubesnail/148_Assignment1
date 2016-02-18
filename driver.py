@@ -23,12 +23,12 @@ class Driver:
         @type speed: int
         @rtype: None
         """
-        # TODO
         self.id = identifier
         self.location = location
         self.speed = speed
         self.destination = None
         self.rider = None
+        self.is_idle = True
 
     def __str__(self):
         """Return a string representation.
@@ -45,7 +45,6 @@ class Driver:
         @type self: Driver
         @rtype: bool
         """
-        # TODO
         return self == other
 
     def get_travel_time(self, destination):
@@ -56,7 +55,6 @@ class Driver:
         @type destination: Location
         @rtype: int
         """
-        # TODO
         return round(manhattan_distance(self.location,destination)/self.speed)
 
     def start_drive(self, location):
@@ -66,8 +64,8 @@ class Driver:
         @type location: Location
         @rtype: int
         """
-        # TODO
         time = self.get_travel_time(location)
+        self.is_idle = False
         self.destination = location
 
         return time
@@ -80,8 +78,8 @@ class Driver:
         @type self: Driver
         @rtype: None
         """
-        # TODO
         self.location = self.destination
+        self.is_idle = True
 
     def start_ride(self, rider):
         """Start a ride and return the time the ride will take.
@@ -90,11 +88,11 @@ class Driver:
         @type rider: Rider
         @rtype: int
         """
-        # TODO
         self.rider = rider
         self.location = rider.origin
         self.destination = rider.destination
-        return self.get_travel_time(rider.destination)
+        time = self.start_drive()
+        return time
     def end_ride(self):
         """End the current ride, and arrive at the rider's destination.
 
@@ -104,8 +102,7 @@ class Driver:
         @type self: Driver
         @rtype: None
         """
-        # TODO
         self.rider.location = self.destination
         self.rider = None
-        self.location = self.destination
+        self.end_drive()
         self.destination = None
