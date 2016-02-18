@@ -22,8 +22,8 @@ class Rider:
     pass
     def __init__(self,identifier,patience,origin,destination):
         #patience = 0 #number of minutes the rider will wait
-        status = WAITING
-        id = identifier
-        origin = origin
-        destination = destination
-        patience = patience
+        self.status = WAITING
+        self.id = identifier
+        self.origin = origin
+        self.destination = destination
+        self.patience = patience

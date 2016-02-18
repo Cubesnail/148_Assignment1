@@ -221,7 +221,7 @@ class RiderRequest(Event):
         if driver is not None:
             travel_time = driver.start_drive(self.rider.origin)
             events.append(Pickup(self.timestamp + travel_time, self.rider, driver))
-        events.append(Cancellation(self.timestamp + self.rider.patience, self.rider))
+            events.append(Cancellation(self.timestamp + self.rider.patience, self.rider)) #Changed starter code here
         return events
 
     def __str__(self):
@@ -276,7 +276,7 @@ class DriverRequest(Event):
         if rider is not None:
             travel_time = self.driver.start_drive(rider.destination)
             events.append(Pickup(self.timestamp + rider.patience,rider,self.driver))
-        events.append(Cancellation(self.timestamp + rider.patience, rider, self.driver))
+            events.append(Cancellation(self.timestamp + rider.patience, rider, self.driver)) #tab added here, changed starter code
         return events
 
     def __str__(self):
@@ -349,19 +349,18 @@ def create_event_list(filename):
             tokens = line.split()
             timestamp = int(tokens[0])
             event_type = tokens[1]
-            event_helper = Event(timestamp)
 
             # HINT: Use Location.deserialize to convert the location string to
             # a location.
 
             if event_type == "DriverRequest":
-                driver_helper = Driver(tokens[2],deserialize_location(tokens[3]),int(tokens[4]))
-                # DriverRequest(timestamp,driver_helper)
+                temp_Driver = Driver(tokens[2],deserialize_location(tokens[3]),int(tokens[4]))
+                Event = DriverRequest(timestamp,temp_Driver)
                 # Create a DriverRequest event.
                 pass
             elif event_type == "RiderRequest":
-                rider_helper = Rider(tokens[2],tokens[5],deserialize_location(tokens[3]),deserialize_location(tokens[4]))
-                # RiderRequest(timestamp,rider_helper)
+                temp_Rider = Rider(tokens[2],tokens[5],deserialize_location(tokens[3]),deserialize_location(tokens[4]))
+                Event = RiderRequest(timestamp,temp_Rider)
                 # Create a RiderRequest event.
                 pass
             events.append(Event)

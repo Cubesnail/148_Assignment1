@@ -26,7 +26,7 @@ class Dispatcher:
         """
         # TODO
         self.driver_list = []
-        self.rider_queue = PriorityQueue
+        self.rider_queue = PriorityQueue()
 
     def __str__(self):
         """Return a string representation.
@@ -67,7 +67,10 @@ class Dispatcher:
         @rtype: Rider | None
         """
         # TODO
-        return self.rider_queue.remove()
+        if not self.rider_queue.is_empty():
+            return self.rider_queue.remove()
+        else:
+            return None
 
     def cancel_ride(self, rider):
         """Cancel the ride for rider.
