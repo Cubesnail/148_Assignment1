@@ -22,5 +22,5 @@
 5 RiderRequest Bisque 3,2 2,3 5
 10 RiderRequest Cerise 4,2 1,5 15
 15 RiderRequest Desert 5,1 4,3 5
-20 RiderRequest Eggshell 3,4 3,1 2
+20 RiderRequest Eggshell 3,4 3,1 1
 25 RiderRequest Fallow 2,1 2,5 10

@@ -221,7 +221,7 @@ class RiderRequest(Event):
         if driver is not None:
             travel_time = driver.start_drive(self.rider.origin)
             events.append(Pickup(self.timestamp + travel_time, self.rider, driver))
-            events.append(Cancellation(self.timestamp + self.rider.patience, self.rider)) #Changed starter code here
+            events.append(Cancellation(self.timestamp + self.rider.patience, self.rider))  # Changed starter code here
         return events
 
     def __str__(self):
