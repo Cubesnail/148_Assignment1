@@ -36,7 +36,6 @@ class Driver:
         @type self: Driver
         @rtype: str
         """
-        #
         return self.name + ' ' + str(self.location.row) + ',' + str(self.location.col) + ' ' + str(self.speed)
 
     def __eq__(self, other):

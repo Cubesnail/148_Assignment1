@@ -18,12 +18,30 @@ SATISFIED = "satisfied"
 
 
 class Rider:
-    # TODO: patience, status, origin, destination
+    """ A rider for a ride sharing service
 
+    === Attributes ===
+    @type id: str
+        A unique identifier for the rider.
+    @type origin: Location
+        The riders original location
+    @type destination: Location
+        The riders requested destination
+    @type patience: int
+        The amount of minutes the rider will wait
+    """
     def __init__(self, identifier, patience, origin, destination):
-        #patience = 0 #number of minutes the rider will wait
-        self.status = WAITING
-        self.id = identifier
-        self.origin = origin
-        self.destination = destination
-        self.patience = patience
+        """Initialize a Rider.
+
+        @type self: Rider
+        @type identifier: str
+        @type patience: int
+        @type origin: Location
+        @type destination: Location
+        @rtype: None
+        """
+        self.status = WAITING  # The status of the rider.
+        self.id = identifier  # The name of the rider.
+        self.origin = origin  # The riders original location.
+        self.destination = destination  # The riders requested destination.
+        self.patience = patience # The amount of minutes the rider will wait.
