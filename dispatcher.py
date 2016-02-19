@@ -26,6 +26,7 @@ class Dispatcher:
         """
         # TODO
         self.driver_list = []
+        self.rider_list = []
         self.rider_queue = PriorityQueue()
 
     def __str__(self):
@@ -49,6 +50,7 @@ class Dispatcher:
         # TODO
         if len(self.driver_list) == 0:
             self.rider_queue.add(rider)
+
             return None
         else:
             shortest_time = self.driver_list[0]
@@ -81,5 +83,5 @@ class Dispatcher:
         @rtype: None
         """
         # TODO
-        self.rider_queue.remove()
+        #self.rider_queue.remove()
         pass

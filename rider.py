@@ -30,7 +30,8 @@ class Rider:
     @type patience: int
         The amount of minutes the rider will wait
     """
-    def __init__(self, identifier, patience, origin, destination):
+    #TODO
+    def __init__(self, timestamp, identifier, patience, origin, destination):
         """Initialize a Rider.
 
         @type self: Rider
@@ -45,6 +46,11 @@ class Rider:
         self.origin = origin  # The riders original location.
         self.destination = destination  # The riders requested destination.
         self.patience = patience # The amount of minutes the rider will wait.
+        self.timestamp = timestamp
 
-    def __eq__(self,other):
-        return self.
+    def __eq__(self, other):
+        return self.timestamp == other.timestamp
+    def __lt__(self, other):
+        return self.timestamp < other.timestamp
+    def __ge__(self, other):
+        return self.timestamp > other.timestamp

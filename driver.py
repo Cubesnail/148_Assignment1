@@ -14,7 +14,7 @@ class Driver:
         A property that is True if the driver is idle and False otherwise.
     """
 
-    def __init__(self, identifier, location, speed):
+    def __init__(self, timestamp, identifier, location, speed):
         """Initialize a Driver.
 
         @type self: Driver
@@ -29,7 +29,7 @@ class Driver:
         self.destination = None
         self.rider = None
         self.is_idle = True
-
+        self.timestamp = timestamp
     def __str__(self):
         """Return a string representation.
 
@@ -44,7 +44,7 @@ class Driver:
         @type self: Driver
         @rtype: bool
         """
-        return self == other
+        return self.timestamp == other.timestamp
 
     def get_travel_time(self, destination):
         """Return the time it will take to arrive at the destination,
