@@ -118,7 +118,6 @@ class PriorityQueue(Container):
         ['blue', 'green', 'red', 'yellow']
         """
         #TODO
-        self._items.append(item)
         appended = False
         x = 0
         while x < (len(self._items)) and not appended:
