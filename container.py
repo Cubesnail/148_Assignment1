@@ -117,5 +117,21 @@ class PriorityQueue(Container):
         >>> pq._items
         ['blue', 'green', 'red', 'yellow']
         """
+        #TODO
         self._items.append(item)
-        self._items.sort()
+        appended = False
+        x = 0
+        while x < (len(self._items)) and not appended:
+            if item.__le__(self._items[x]):
+                self._items.insert(x,item)
+                appended = True
+            elif item.__eq__(self._items[x]):
+                if x != len(self._items) - 1:
+                    self._items.insert(x+1,item)
+                    appended = True
+                else:
+                    self._items.append(item)
+                    appended = True
+            x += 1
+        if not appended:
+            self._items.append(item)

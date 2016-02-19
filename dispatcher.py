@@ -48,6 +48,7 @@ class Dispatcher:
         """
         # TODO
         if len(self.driver_list) == 0:
+            self.rider_queue.add(rider)
             return None
         else:
             shortest_time = self.driver_list[0]
@@ -55,7 +56,7 @@ class Dispatcher:
                 if name.get_travel_time(rider.destination) < shortest_time.get_travel_time(rider.destination):
                     if name.is_idle():
                         shortest_time = name
-        return name
+        return shortest_time
 
     def request_rider(self, driver):
         """Return a rider for the driver, or None if no rider is available.

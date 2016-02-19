@@ -275,7 +275,7 @@ class DriverRequest(Event):
         if rider is not None:
             travel_time = self.driver.start_drive(rider.destination)
             events.append(Pickup(self.timestamp + rider.patience,rider,self.driver))
-            events.append(Cancellation(self.timestamp + rider.patience, rider, self.driver))  # tab added here,
+            #events.append(Cancellation(self.timestamp + rider.patience, rider, self.driver))  # tab added here,
             #  changed starter code
         return events
 
@@ -289,7 +289,6 @@ class DriverRequest(Event):
 
 
 class Cancellation(Event):
-    # TODO
     def __init__(self, timestamp, rider, driver):
         super().__init__(timestamp)
         self.timestamp = timestamp
@@ -300,13 +299,12 @@ class Cancellation(Event):
         return "{} -- {}: Cancelled.".format(self.timestamp,self.rider)
 
     def do(self, dispatcher, monitor):
-        monitor.notify(self, RIDER, CANCEL, self.rider.id, self.rider.location)
+        monitor.notify(self, RIDER, CANCEL, self.rider.id, self.rider.origin)
 
         dispatcher.cancel_ride(self.rider)
 
 
 class Pickup(Event):
-    # TODO
     def __init__(self, timestamp, rider, driver):
         super().__init__(timestamp)
         self.timestamp = timestamp
@@ -319,18 +317,15 @@ class Pickup(Event):
         return "{} -- {}: Got picked up.".format(self.timestamp,self.rider)
 
     def do(self, dispatcher, monitor):
-        monitor.notify(self, RIDER, PICKUP, self.rider.id, self.rider.location)
+        monitor.notify(self, RIDER, PICKUP, self.rider.id, self.rider.origin)
 
 class Dropoff(Event):
-    # TODO
     def __init__(self, timestamp, rider, driver):
         super().__init__(timestamp)
         self.rider = rider
         self.timestamp = timestamp
         self.driver = driver
-
         self.driver.end_ride(driver)
-
     def __str__(self):
         return "{} -- {}: Got dropped off.".format(self.timestamp,self.rider)
 

@@ -50,8 +50,6 @@ class Simulation:
             An initial list of events.
         @rtype: dict[str, object]
         """
-        # TODO
-
         # Add all initial events to the event queue.
         for event in initial_events:
             self._events.add(event)
@@ -60,8 +58,11 @@ class Simulation:
         # events to the event queue.
         while not self._events.is_empty():
             temp_event = self._events.remove()
-            temp_event.do(self._dispatcher,self._monitor)
-
+            temp_events = []
+            temp_events = temp_event.do(self._dispatcher,self._monitor)
+            if temp_events is not None:
+                for event in temp_events:
+                    self._events.add(event)
         return self._monitor.report()
 
 

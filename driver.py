@@ -89,8 +89,7 @@ class Driver:
         """
         self.rider = rider
         self.location = rider.origin
-        self.destination = rider.destination
-        time = self.start_drive()
+        time = self.start_drive(rider.destination)
         return time
     def end_ride(self):
         """End the current ride, and arrive at the rider's destination.
