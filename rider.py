@@ -45,3 +45,6 @@ class Rider:
         self.origin = origin  # The riders original location.
         self.destination = destination  # The riders requested destination.
         self.patience = patience # The amount of minutes the rider will wait.
+
+    def __eq__(self,other):
+        return self.
