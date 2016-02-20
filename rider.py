@@ -49,8 +49,25 @@ class Rider:
         self.timestamp = timestamp
 
     def __eq__(self, other):
+        """Return true if self is equal to other and false otherwise.
+
+        @param other: Rider
+        @return: bool
+        """
         return self.timestamp == other.timestamp
+
     def __lt__(self, other):
+        """Return true if self is less than other and false otherwise.
+
+        @param other: Rider
+        @return: bool
+        """
         return self.timestamp < other.timestamp
+
     def __ge__(self, other):
+        """Return true if self is greater than other and false otherwise.
+
+        @param other: Rider
+        @return: bool
+        """
         return self.timestamp > other.timestamp

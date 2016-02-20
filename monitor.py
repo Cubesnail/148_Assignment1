@@ -1,3 +1,4 @@
+from location import manhattan_distance
 """
 The Monitor module contains the Monitor class, the Activity class,
 and a collection of constants. Together the elements of the module
@@ -149,11 +150,17 @@ class Monitor:
         @type self: Monitor
         @rtype: float
         """
-        # TODO
         total_distance = 0
-        count = 0
+        distances = []
         for activities in self._activities[DRIVER].values():
-            pass
+            if len(activities) >= 2:
+                temp_location = activities[0].location
+                for activity in activities:
+                    total_distance += manhattan_distance(temp_location,activity.location)
+                    temp_location = activity.location
+            distances.append(total_distance)
+            # Record all the drivers driven distance.
+            return sum(distances)/len(distances)
 
     def _average_ride_distance(self):
         """Return the average distance drivers have driven on rides.
@@ -161,5 +168,14 @@ class Monitor:
         @type self: Monitor
         @rtype: float
         """
-        # TODO
-        pass
+        distances = []
+        for activities in self._activities[RIDER].values():
+            if len(activities) >= 3:
+                for activity in activities:
+                    if activity.description == PICKUP:
+                        pickup_location = activity.location
+                    elif activity.description == DROPOFF:
+                        dropoff_location = activity.location
+                distances.append(manhattan_distance(pickup_location,dropoff_location))
+                # Record all the riders ride distance.
+        return sum(distances)/len(distances)

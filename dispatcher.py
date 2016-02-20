@@ -2,6 +2,10 @@ from driver import Driver
 from rider import Rider
 from container import PriorityQueue
 
+WAITING = "waiting"
+CANCELLED = "cancelled"
+SATISFIED = "satisfied"
+
 class Dispatcher:
     """A dispatcher fulfills requests from riders and drivers for a
     ride-sharing service.
@@ -84,3 +88,4 @@ class Dispatcher:
         # TODO
         if self.rider_queue.__contains__(rider):
             self.rider_queue.delete(rider)
+            rider.status = CANCELLED

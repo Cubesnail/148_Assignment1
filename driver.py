@@ -1,6 +1,9 @@
 from location import Location, manhattan_distance
 from rider import Rider
 
+WAITING = "waiting"
+CANCELLED = "cancelled"
+SATISFIED = "satisfied"
 
 class Driver:
     """A driver for a ride-sharing service.
@@ -88,6 +91,7 @@ class Driver:
         """
         self.rider = rider
         self.location = rider.origin
+        rider.status = SATISFIED
         time = self.start_drive(rider.destination)
         return time
     def end_ride(self):
@@ -99,6 +103,7 @@ class Driver:
         @type self: Driver
         @rtype: None
         """
+        self.rider.status = SATISFIED
         self.rider = None
         self.end_drive()
         self.destination = None
