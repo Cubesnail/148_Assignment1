@@ -134,3 +134,24 @@ class PriorityQueue(Container):
             x += 1
         if not appended:
             self._items.append(item)
+
+    def __contains__(self, item):
+        """
+
+        @type
+        @type item:
+        @return:
+        """
+        #TODO
+
+        return item in self._items
+
+    def delete(self,item):
+        """
+
+        @param item:
+        @return:
+        """
+        #TODO
+        if item in self._items:
+            self._items.remove(item)

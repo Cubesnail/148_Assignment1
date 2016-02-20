@@ -36,7 +36,7 @@ class Driver:
         @type self: Driver
         @rtype: str
         """
-        return self.name + ' ' + str(self.location.row) + ',' + str(self.location.col) + ' ' + str(self.speed)
+        return self.id + ' ' + str(self.location.row) + ',' + str(self.location.col) + ' ' + str(self.speed)
 
     def __eq__(self, other):
         """Return True if self equals other, and false otherwise.
@@ -66,7 +66,6 @@ class Driver:
         time = self.get_travel_time(location)
         self.is_idle = False
         self.destination = location
-
         return time
 
     def end_drive(self):
@@ -100,7 +99,6 @@ class Driver:
         @type self: Driver
         @rtype: None
         """
-        self.rider.location = self.destination
         self.rider = None
         self.end_drive()
         self.destination = None

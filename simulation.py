@@ -60,6 +60,7 @@ class Simulation:
             temp_event = self._events.remove()
             temp_events = []
             temp_events = temp_event.do(self._dispatcher,self._monitor)
+            print(temp_event.__str__())
             if temp_events is not None:
                 for event in temp_events:
                     self._events.add(event)
@@ -67,7 +68,8 @@ class Simulation:
 
 
 if __name__ == "__main__":
-    events = create_event_list("events.txt")
+    #TODO: change filename
+    events = create_event_list("testevents.txt")
     sim = Simulation()
     final_stats = sim.run(events)
     print(final_stats)

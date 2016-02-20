@@ -26,7 +26,6 @@ class Dispatcher:
         """
         # TODO
         self.driver_list = []
-        self.rider_list = []
         self.rider_queue = PriorityQueue()
 
     def __str__(self):
@@ -50,13 +49,12 @@ class Dispatcher:
         # TODO
         if len(self.driver_list) == 0:
             self.rider_queue.add(rider)
-
             return None
         else:
             shortest_time = self.driver_list[0]
             for name in self.driver_list:
                 if name.get_travel_time(rider.destination) < shortest_time.get_travel_time(rider.destination):
-                    if name.is_idle():
+                    if name.is_idle:
                         shortest_time = name
         return shortest_time
 
@@ -73,6 +71,7 @@ class Dispatcher:
         if not self.rider_queue.is_empty():
             return self.rider_queue.remove()
         else:
+            self.driver_list.append(driver)
             return None
 
     def cancel_ride(self, rider):
@@ -83,5 +82,5 @@ class Dispatcher:
         @rtype: None
         """
         # TODO
-        #self.rider_queue.remove()
-        pass
+        if self.rider_queue.__contains__(rider):
+            self.rider_queue.delete(rider)

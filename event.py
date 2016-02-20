@@ -221,7 +221,8 @@ class RiderRequest(Event):
         if driver is not None:
             travel_time = driver.start_drive(self.rider.origin)
             events.append(Pickup(self.timestamp + travel_time, self.rider, driver))
-        events.append(Cancellation(self.timestamp + self.rider.patience, self.rider, driver))  # Changed starter code here
+        events.append(Cancellation(self.timestamp + self.rider.patience, self.rider, driver))
+        # Changed starter code here
         return events
 
     def __str__(self):
@@ -230,7 +231,7 @@ class RiderRequest(Event):
         @type self: RiderRequest
         @rtype: str
         """
-        return "{} -- {}: Request a driver".format(self.timestamp, self.rider)
+        return "{} -- {}: Request a driver".format(self.timestamp, self.rider.id)
 
 
 class DriverRequest(Event):
@@ -273,10 +274,11 @@ class DriverRequest(Event):
         rider = dispatcher.request_rider(self.driver)
         events = []
         if rider is not None:
-            travel_time = self.driver.start_drive(rider.destination)
-            events.append(Pickup(self.timestamp + rider.patience,rider,self.driver))
-            #events.append(Cancellation(self.timestamp + rider.patience, rider, self.driver))  # tab added here,
-            #  changed starter code
+            travel_time = self.driver.start_drive(rider.origin)  #changed destination to origin
+            events.append(Pickup(self.timestamp + travel_time, rider, self.driver))  #rider.patience replaced
+            # with travel time
+            events.append(Cancellation(self.timestamp + rider.patience, rider, self.driver))  # tab added here,
+        #  changed starter code
         return events
 
     def __str__(self):
@@ -296,10 +298,10 @@ class Cancellation(Event):
         self.driver = driver
 
     def __str__(self):
-        return "{} -- {}: Cancelled.".format(self.timestamp,self.rider)
+        return "{} -- {}: Cancelled.".format(self.timestamp, self.rider.id)
 
     def do(self, dispatcher, monitor):
-        monitor.notify(self, RIDER, CANCEL, self.rider.id, self.rider.origin)
+        monitor.notify(self.timestamp, RIDER, CANCEL, self.rider.id, self.rider.origin)
 
         dispatcher.cancel_ride(self.rider)
 
@@ -311,13 +313,16 @@ class Pickup(Event):
         self.rider = rider
         self.driver = driver
 
-        self.driver.start_ride(self.rider)
-
     def __str__(self):
-        return "{} -- {}: Got picked up.".format(self.timestamp,self.rider)
+        return "{} -- {}: Got picked up.".format(self.timestamp,self.rider.id)
 
     def do(self, dispatcher, monitor):
-        monitor.notify(self, RIDER, PICKUP, self.rider.id, self.rider.origin)
+        time = self.driver.start_ride(self.rider)
+        monitor.notify(self.timestamp, RIDER, PICKUP, self.rider.id, self.rider.origin)
+        events = []
+        events.append(Dropoff(self.timestamp + time, self.rider, self.driver))
+        return events
+
 
 class Dropoff(Event):
     def __init__(self, timestamp, rider, driver):
@@ -325,12 +330,16 @@ class Dropoff(Event):
         self.rider = rider
         self.timestamp = timestamp
         self.driver = driver
-        self.driver.end_ride(driver)
+        self.driver.end_ride()
+
     def __str__(self):
-        return "{} -- {}: Got dropped off.".format(self.timestamp,self.rider)
+        return "{} -- {}: Got dropped off.".format(self.timestamp,self.rider.id)
 
     def do(self, dispatcher, monitor):
-        monitor.notify(self, RIDER, DROPOFF, self.rider.id, self.rider.destination)
+        monitor.notify(self.timestamp, RIDER, DROPOFF, self.rider.id, self.rider.destination)
+        events = []
+        events.append(DriverRequest(self.timestamp, self.driver))
+        return events
 
 def create_event_list(filename):
     """Return a list of Events based on raw list of events in <filename>.
