@@ -7,7 +7,6 @@ class Location:
         @type column: int
         @rtype: None
         """
-        # TODO
         pass
         self.row = row
         self.col = column

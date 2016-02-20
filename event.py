@@ -225,7 +225,6 @@ class RiderRequest(Event):
             travel_time = driver.start_drive(self.rider.origin)
             events.append(Pickup(self.timestamp + travel_time, self.rider, driver))
         events.append(Cancellation(self.timestamp + self.rider.patience, self.rider, driver))
-        # Changed starter code here
         return events
 
     def __str__(self):
@@ -277,11 +276,11 @@ class DriverRequest(Event):
         rider = dispatcher.request_rider(self.driver)
         events = []
         if rider is not None:
-            travel_time = self.driver.start_drive(rider.origin)  #changed destination to origin
-            events.append(Pickup(self.timestamp + travel_time, rider, self.driver))  #rider.patience replaced
+            travel_time = self.driver.start_drive(rider.origin)  # changed destination to origin
+            events.append(Pickup(self.timestamp + travel_time, rider, self.driver))  # rider.patience replaced
             # with travel time
-            #events.append(Cancellation(self.timestamp + rider.patience, rider, self.driver))  # tab added here,
-        #  changed starter code
+            # events.append(Cancellation(self.timestamp + rider.patience, rider, self.driver))  # tab added here,
+            # changed starter code
         return events
 
     def __str__(self):
@@ -333,7 +332,7 @@ class Cancellation(Event):
             monitor.notify(self.timestamp, RIDER, CANCEL, self.rider.id, self.rider.origin)
 
             dispatcher.cancel_ride(self.rider)
-            #Cancel the ride, if the rider is waiting.
+            # Cancel the ride, if the rider is waiting.
 
 class Pickup(Event):
     """A driver picks up a passenger
@@ -377,12 +376,12 @@ class Pickup(Event):
             time = self.driver.start_ride(self.rider)
             monitor.notify(self.timestamp, DRIVER, PICKUP, self.driver.id, self.rider.origin)
             monitor.notify(self.timestamp, RIDER, PICKUP, self.rider.id, self.rider.origin)
-            #Notify the monitor
+            # Notify the monitor
             events = []
             events.append(Dropoff(self.timestamp + time, self.rider, self.driver))
-            #Add a Dropoff event
+            # Add a Dropoff event
             dispatcher.cancel_ride(self.rider)
-            #Remove the rider from the queue
+            # Remove the rider from the queue
         else:
             self.driver.rider = None
         return events
@@ -432,6 +431,7 @@ class Dropoff(Event):
         events = []
         events.append(DriverRequest(self.timestamp, self.driver))
         return events
+
 
 def create_event_list(filename):
     """Return a list of Events based on raw list of events in <filename>.

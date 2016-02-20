@@ -6,6 +6,7 @@ WAITING = "waiting"
 CANCELLED = "cancelled"
 SATISFIED = "satisfied"
 
+
 class Dispatcher:
     """A dispatcher fulfills requests from riders and drivers for a
     ride-sharing service.
@@ -28,7 +29,6 @@ class Dispatcher:
         @type self: Dispatcher
         @rtype: None
         """
-        # TODO
         self.driver_list = []
         self.rider_queue = PriorityQueue()
 
@@ -38,8 +38,8 @@ class Dispatcher:
         @type self: Dispatcher
         @rtype: str
         """
-        # TODO
-        pass
+        print("Drivers: ",end="")
+        print(self.driver_list)
 
     def request_driver(self, rider):
         """Return a driver for the rider, or None if no driver is available.
@@ -50,7 +50,6 @@ class Dispatcher:
         @type rider: Rider
         @rtype: Driver | None
         """
-        # TODO
         if len(self.driver_list) == 0:
             self.rider_queue.add(rider)
             return None
@@ -71,7 +70,6 @@ class Dispatcher:
         @type driver: Driver
         @rtype: Rider | None
         """
-        # TODO
         if not self.rider_queue.is_empty():
             return self.rider_queue.remove()
         else:
@@ -85,7 +83,6 @@ class Dispatcher:
         @type rider: Rider
         @rtype: None
         """
-        # TODO
         if self.rider_queue.__contains__(rider):
             self.rider_queue.delete(rider)
             rider.status = CANCELLED

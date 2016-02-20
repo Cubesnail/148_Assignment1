@@ -33,6 +33,7 @@ class Driver:
         self.rider = None
         self.is_idle = True
         self.timestamp = timestamp
+
     def __str__(self):
         """Return a string representation.
 
@@ -94,6 +95,7 @@ class Driver:
         rider.status = SATISFIED
         time = self.start_drive(rider.destination)
         return time
+
     def end_ride(self):
         """End the current ride, and arrive at the rider's destination.
 
