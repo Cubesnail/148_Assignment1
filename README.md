@@ -1,2 +1,2 @@
-# 148_Assignment1
-CSC148Assignment1
+# Taxi Sim
+Simulates taxi traffic 
